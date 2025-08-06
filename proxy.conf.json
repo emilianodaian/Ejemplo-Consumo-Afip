@@ -1,0 +1,15 @@
+{
+  "/api/afip/*": {
+    "target": "http://time.afip.gov.ar",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api/afip": ""
+    },
+    "headers": {
+      "Accept": "application/xml, text/xml, */*",
+      "User-Agent": "Angular-AFIP-Client"
+    }
+  }
+}
