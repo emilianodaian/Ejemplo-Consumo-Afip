@@ -1,0 +1,50 @@
+<div class="time-container">
+  <h1 class="title">Fecha y Hora desde AFIP</h1>
+  
+  <div class="content">
+    <!-- Estado de carga -->
+    <div *ngIf="loading" class="loading">
+      <p>Cargando fecha y hora desde AFIP...</p>
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Mensaje de error -->
+    <div *ngIf="error && !loading" class="error">
+      <h3>Error al obtener la información</h3>
+      <p>{{ error }}</p>
+      <button class="retry-button" (click)="refreshTime()">
+        Intentar nuevamente
+      </button>
+    </div>
+
+    <!-- Datos obtenidos exitosamente -->
+    <div *ngIf="timeData && !loading && !error" class="success">
+      <div class="time-info">
+        <div class="date-section">
+          <h3>Fecha</h3>
+          <p class="date-value">{{ formatDate(timeData.fecha) }}</p>
+          <span class="raw-value">Formato original: {{ timeData.fecha }}</span>
+        </div>
+        
+        <div class="time-section">
+          <h3>Hora</h3>
+          <p class="time-value">{{ formatTime(timeData.hora) }}</p>
+          <span class="raw-value">Formato original: {{ timeData.hora }}</span>
+        </div>
+      </div>
+      
+      <button class="refresh-button" (click)="refreshTime()">
+        Actualizar
+      </button>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <p class="info-text">
+      Este componente obtiene la fecha y hora oficial desde el servicio de AFIP Argentina.
+    </p>
+    <p class="endpoint-info">
+      Endpoint: <code>http://time.afip.gov.ar</code>
+    </p>
+  </div>
+</div>
